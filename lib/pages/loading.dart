@@ -28,6 +28,8 @@ class _LoadingState extends State<Loading> {
               url: worldTime.url,
               isDaytime: worldTime.isDaytime,
               time: value));
+    }).onError((error, stackTrace) {
+      print(error);
     });
   }
 

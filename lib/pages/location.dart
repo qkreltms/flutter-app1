@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/models/cart_model.dart';
+import 'package:my_app/pages/location/icon_button.dart';
 import 'package:my_app/services/world_time.dart';
+import 'package:provider/provider.dart';
 
-// changelocation 추가, 삭제
-// global state 다루는 법
+// TODO: changelocation 추가, 삭제
+// DONE: global state 다루는 법
 
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -37,41 +40,47 @@ class _LocationState extends State<Location> {
 
     return Scaffold(
       backgroundColor: appBarColor,
-      body: SafeArea(
-          child: Container(
-              decoration: BoxDecoration(
-                  // ignore: unnecessary_brace_in_string_interps
-                  image: DecorationImage(
-                      image: AssetImage('assets/${bgImage}'),
-                      fit: BoxFit.cover)),
-              child: Column(
-                children: <Widget>[
-                  IconButton(
-                      tooltip: 'Choose location',
-                      onPressed: () async {
-                        // change-location에서 pop 함수와 같이 전달된 데이터가 아래로 온다.
-                        WorldTime res = await Navigator.pushNamed(
-                            context, '/change-location') as WorldTime;
+      body: Consumer<CartModel>(
+          builder: (context, cart, child) => SafeArea(
+              child: Container(
+                  decoration: BoxDecoration(
+                      // ignore: unnecessary_brace_in_string_interps
+                      image: DecorationImage(
+                          image: AssetImage('assets/${bgImage}'),
+                          fit: BoxFit.cover)),
+                  child: Column(
+                    children: <Widget>[
+                      MyIconButton(setData: (WorldTime res) {
                         setState(() {
                           data = res;
                         });
-                      },
-                      icon: const Icon(Icons.edit_location)),
-                  // 빈공간 넣기
-                  const SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(location),
+                      }),
+                      // 빈공간 넣기
+                      const SizedBox(height: 20.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(location),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
+                      Text(
+                        time,
+                        style: const TextStyle(fontSize: 80),
+                      ),
+                      Text(cart.count()),
+                      OutlinedButton(
+                          onPressed: () {
+                            cart.increase();
+                          },
+                          child: const Text('Increase')),
+                      OutlinedButton(
+                          onPressed: () {
+                            cart.decrease();
+                          },
+                          child: const Text('Decrease')),
                     ],
-                  ),
-                  const SizedBox(height: 20.0),
-                  Text(
-                    time,
-                    style: const TextStyle(fontSize: 80),
-                  )
-                ],
-              ))),
+                  )))),
     );
   }
 }

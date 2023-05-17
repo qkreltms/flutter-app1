@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/models/cart_model.dart';
 import 'package:my_app/services/world_time.dart';
+import 'package:provider/provider.dart';
 
 class ChangeLocation extends StatefulWidget {
   const ChangeLocation({super.key});
@@ -26,7 +28,8 @@ class _ChangeLocationState extends State<ChangeLocation> {
   @override
   Widget build(BuildContext context) {
     var data = ModalRoute.of(context)?.settings.arguments;
-    print(data);
+    var cart = context.read<CartModel>();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -42,7 +45,8 @@ class _ChangeLocationState extends State<ChangeLocation> {
                       onTap: () {
                         onTap(context, index);
                       },
-                      title: Text(locations[index].location)));
+                      title: Text(
+                          '${locations[index].location}${cart.count()} ')));
             }),
       ),
     );
