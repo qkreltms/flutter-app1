@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/cart_model.dart';
-import 'package:my_app/pages/change-location.dart';
+import 'package:my_app/pages/change_location.dart';
 import 'package:my_app/pages/loading.dart';
 import 'package:my_app/pages/location.dart';
 import 'package:provider/provider.dart';
