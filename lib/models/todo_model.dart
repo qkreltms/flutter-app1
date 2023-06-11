@@ -21,14 +21,24 @@ class TodoModel extends ChangeNotifier {
 
   UnmodifiableListView<TodoItem> get items => UnmodifiableListView(_items);
 
-  void add({String text = '', bool isDone = false}) {
-    int id = _items[_items.length].id + 1;
-    _items.add(TodoItem(id: id, text: text, isDone: isDone));
+  void add(TodoItem item) {
+    int id = _items[_items.length - 1].id + 1;
+    _items.add(TodoItem(id: id, text: item.text, isDone: item.isDone));
     notifyListeners();
   }
 
   void remove(TodoItem item) {
     _items.remove(item);
+    notifyListeners();
+  }
+
+  void update(TodoItem item) {
+    _items = _items.map((e) {
+      if (e.id == item.id) {
+        return item;
+      }
+      return e;
+    }).toList();
     notifyListeners();
   }
 

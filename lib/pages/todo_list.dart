@@ -3,9 +3,8 @@ import 'package:my_app/components/todo_item.dart';
 import 'package:my_app/models/todo_model.dart';
 import 'package:provider/provider.dart';
 
-// TODO: 투두리스트로 접근할 수 있는 글로벌 네비게이션 만들기
-// 입력/수정/삭제 만들기
-// 남겨진 TODO 해결하기
+// TODO: 투두리스트로 접근할 수 있는 글로벌 바텀 네비게이션 만들기
+// TODO: 네비게이션 Stack 형식으로 수정
 // 리팩토링
 class TodoListComponent extends StatefulWidget {
   const TodoListComponent({super.key});
@@ -34,6 +33,12 @@ class _TodoListState extends State<TodoListComponent> {
           backgroundColor: Colors.blue,
           title: const Text('Todo List'),
           elevation: 0,
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.pushNamed(context, '/todo-edit', arguments: null);
+          },
         ),
         body: Consumer<TodoModel>(
             builder: (context, todos, child) => SafeArea(

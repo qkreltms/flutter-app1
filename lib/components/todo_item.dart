@@ -25,6 +25,19 @@ class _TodoItemState extends State<TodoItemComponent> {
                       todos.done(widget.todo);
                     }),
                 Text(widget.todo.text),
+                IconButton(
+                    tooltip: '수정',
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, '/todo-edit',
+                          arguments: widget.todo);
+                    },
+                    icon: const Icon(Icons.update)),
+                IconButton(
+                    tooltip: "삭제",
+                    icon: const Icon(Icons.remove_circle),
+                    onPressed: () {
+                      todos.remove(widget.todo);
+                    })
               ],
             ));
   }
