@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:flutter/widgets.dart';
 
 class TodoItem {
-  int? id;
+  int id;
   String text = '';
   bool isDone = false;
 
@@ -17,12 +17,13 @@ class TodoItem {
 // 아래형식은 글로벌 프로바이더
 // 로컬 state로 하는 방식은 다름
 class TodoModel extends ChangeNotifier {
-  final List<TodoItem> _items = [];
+  List<TodoItem> _items = [TodoItem(id: 1, text: 'test', isDone: true)];
 
   UnmodifiableListView<TodoItem> get items => UnmodifiableListView(_items);
 
-  void add(TodoItem item) {
-    _items.add(item);
+  void add({String text = '', bool isDone = false}) {
+    int id = _items[_items.length].id + 1;
+    _items.add(TodoItem(id: id, text: text, isDone: isDone));
     notifyListeners();
   }
 
@@ -32,12 +33,12 @@ class TodoModel extends ChangeNotifier {
   }
 
   void done(TodoItem item) {
-    _items.map((e) {
+    _items = _items.map((e) {
       if (e.id == item.id) {
         e.isDone = !e.isDone;
       }
       return e;
-    });
+    }).toList();
     notifyListeners();
   }
 

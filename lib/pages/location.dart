@@ -46,7 +46,7 @@ class _LocationState extends State<Location> {
                   decoration: BoxDecoration(
                       // ignore: unnecessary_brace_in_string_interps
                       image: DecorationImage(
-                          image: AssetImage('assets/${bgImage}'),
+                          image: AssetImage('assets/$bgImage'),
                           fit: BoxFit.cover)),
                   child: Column(
                     children: <Widget>[
@@ -55,6 +55,14 @@ class _LocationState extends State<Location> {
                           data = res;
                         });
                       }),
+                      IconButton(
+                          style: const ButtonStyle(
+                              // HACK: 버튼 사이즈 안바뀌는데?
+                              iconSize: MaterialStatePropertyAll(50)),
+                          icon: const Icon(Icons.list),
+                          onPressed: () async {
+                            await Navigator.pushNamed(context, '/todo-list');
+                          }),
                       // 빈공간 넣기
                       const SizedBox(height: 20.0),
                       Row(
