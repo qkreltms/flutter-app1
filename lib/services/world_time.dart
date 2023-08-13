@@ -17,7 +17,7 @@ class WorldTime {
       this.isDaytime = false,
       this.time = ''});
 
-  getTime() async {
+  init() async {
     try {
       var res = await get(Uri.https('worldtimeapi.org', '/api/timezone/$url'));
       Map data = jsonDecode(res.body);
@@ -28,7 +28,6 @@ class WorldTime {
 
       isDaytime = now.hour > 6 && now.hour < 20 ? true : false;
       time = DateFormat.jm().format(now);
-      return time;
     } catch (error) {
       print(error);
       time = 'could not get time data';

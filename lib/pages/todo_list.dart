@@ -5,6 +5,9 @@ import 'package:provider/provider.dart';
 
 // TODO: 투두리스트로 접근할 수 있는 글로벌 바텀 네비게이션 만들기
 // TODO: 네비게이션 Stack 형식으로 수정
+// => Go Router로 가능: https://stackoverflow.com/questions/71011598/how-to-work-with-navigationbar-in-go-router-flutter
+// shell을 navigation 위에 얹고 그 위에서 라우팅 하는 방식
+
 // 리팩토링
 class TodoListComponent extends StatefulWidget {
   const TodoListComponent({super.key});

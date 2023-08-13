@@ -4,7 +4,6 @@ import 'package:my_app/pages/location/icon_button.dart';
 import 'package:my_app/services/world_time.dart';
 import 'package:provider/provider.dart';
 
-// TODO: changelocation 추가, 삭제
 // DONE: global state 다루는 법
 
 class Location extends StatefulWidget {
@@ -31,6 +30,7 @@ class _LocationState extends State<Location> {
 
   @override
   Widget build(BuildContext context) {
+    // initState전에 ModalRoute가 호출될 수 없다.
     data = data ?? ModalRoute.of(context)?.settings.arguments as WorldTime?;
     var location = data?.location ?? '';
     var time = data?.time ?? '';

@@ -21,7 +21,7 @@ class _ChangeLocationState extends State<ChangeLocation> {
 
   onTap(BuildContext context, int index) async {
     WorldTime worldTime = locations[index];
-    await worldTime.getTime();
+    await worldTime.init();
     if (context.mounted) Navigator.pop(context, worldTime);
   }
 

@@ -12,24 +12,22 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-  String time = 'Loading...';
+  WorldTime worldTime =
+      WorldTime(location: 'Berlin', flag: 'germany.png', url: 'Europe/Berlin');
 
-  // TODO: Back으로 돌아왔을 때 다시 네트워크 통신 로직 실행시키려면 어떻게 해야될까?
+  // TODO: Back으로 돌아왔을 때 다시 네트워크 통신 로직 실행시키려면 어떻게 해야될까? init이아니라 mount 같은 곳으로 이동시킨다. => 필요한지?
+  // 링크 처럼 기능 구현해야 가능할 듯 함... https://stackoverflow.com/questions/51835039/how-do-i-check-if-the-flutter-application-is-in-the-foreground-or-not
   @override
   void initState() {
     super.initState();
-    WorldTime worldTime = WorldTime(
-        location: 'Berlin', flag: 'germany.png', url: 'Europe/Berlin');
-    Future(() => worldTime.getTime()).then((value) {
+    Future(() => worldTime.init()).then((value) {
       Navigator.pushReplacementNamed(context, '/location',
           arguments: WorldTime(
               location: worldTime.location,
               flag: worldTime.flag,
               url: worldTime.url,
               isDaytime: worldTime.isDaytime,
-              time: value));
-    }).onError((error, stackTrace) {
-      print(error);
+              time: worldTime.time));
     });
   }
 
