@@ -50,6 +50,9 @@ class _LocationState extends State<Location> {
                           fit: BoxFit.cover)),
                   child: Column(
                     children: <Widget>[
+                      FilledButton(onPressed: () {
+                        Navigator.pushNamed(context, '/login');
+                      }, child: const Text('로그인해보기')),
                       MyIconButton(setData: (WorldTime res) {
                         setState(() {
                           data = res;

@@ -4,14 +4,16 @@ import 'package:my_app/models/todo_model.dart';
 import 'package:my_app/pages/change_location.dart';
 import 'package:my_app/pages/loading.dart';
 import 'package:my_app/pages/location.dart';
+import 'package:my_app/pages/login.dart';
 import 'package:my_app/pages/todo_item_update.dart';
 import 'package:my_app/pages/todo_list.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 void main() {
   CartModel test = CartModel();
   TodoModel todo = TodoModel();
-  return runApp(MaterialApp(
+  return runApp(GetMaterialApp(
     initialRoute: '/',
     routes: {
       '/': (context) => const Loading(),
@@ -25,7 +27,9 @@ void main() {
       '/todo-list': (context) => ChangeNotifierProvider.value(
           value: todo, child: const TodoListComponent()),
       '/todo-edit': (context) =>
-          ChangeNotifierProvider.value(value: todo, child: TodoItemUpdatePage())
+          ChangeNotifierProvider.value(value: todo, child: TodoItemUpdatePage()),
+      '/login': (context) =>
+          ChangeNotifierProvider.value(value: todo, child: Login())
     },
   ));
 }
